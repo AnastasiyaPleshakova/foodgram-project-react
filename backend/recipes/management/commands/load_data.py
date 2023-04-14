@@ -22,7 +22,7 @@ class Command(BaseCommand):
                     name=row[NAME],
                     measurement_unit=row[MEASUREMENT_UNIT],
                 )
-        self.stdout.write('Data for the Ingredient table is loaded!')
+        self.stdout.write('Data for the Ingredient table is loaded.')
 
     def handle(self, *args, **options):
         self._load_ingredient()
