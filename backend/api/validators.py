@@ -2,7 +2,7 @@ from rest_framework import status
 from rest_framework.exceptions import APIException, _get_error_details
 
 
-class MyValidationError(APIException):
+class ChangeResponseStatusValidationError(APIException):
     status_code = status.HTTP_404_NOT_FOUND
     default_code = 'invalid'
 

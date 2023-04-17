@@ -105,8 +105,6 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
     ],
-    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 6,
     'NON_FIELD_ERRORS_KEY': 'name, author',
 }
 
@@ -147,6 +145,8 @@ CORS_ALLOWED_ORIGINS = [
 CHAR_MAX_LENGTH = 200
 EMAIL_MAX_LENGTH = 254
 USER_MAX_LENGTH = 150
+COLOR_MAX_LENGTH = 7
+STR_MAX_LENGTH = 30
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

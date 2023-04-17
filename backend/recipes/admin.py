@@ -26,10 +26,12 @@ class IngredientAdmin(admin.ModelAdmin):
 
 class IngredientRecipeTabular(admin.TabularInline):
     model = IngredientRecipe
+    min_num = 1
 
 
 class TagRecipeTabular(admin.TabularInline):
     model = TagRecipe
+    min_num = 1
 
 
 @admin.register(Recipe)
@@ -47,12 +49,12 @@ class RecipeAdmin(admin.ModelAdmin):
 
     def get_ingredients(self, obj):
         return ', '.join([
-            str(ingredient) for ingredient in obj.ingredients.all()
+            ingredient.name for ingredient in obj.ingredients.all()
         ])
 
     def get_tags(self, obj):
         return ', '.join([
-            str(tag) for tag in obj.tags.all()
+            tag.name for tag in obj.tags.all()
         ])
 
     def get_count_favorites(self, obj):
@@ -60,7 +62,7 @@ class RecipeAdmin(admin.ModelAdmin):
 
     get_ingredients.short_description = 'Ингредиенты'
     get_tags.short_description = 'Теги'
-    get_count_favorites.short_description = 'Количество добавлений в избранное'
+    get_count_favorites.short_description = 'Кол-во добавлений в избранное'
 
 
 @admin.register(IngredientRecipe)

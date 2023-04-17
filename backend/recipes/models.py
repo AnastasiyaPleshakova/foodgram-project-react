@@ -14,7 +14,7 @@ class Tag(models.Model):
     color = models.CharField(
         'Цветовой HEK-код',
         unique=True,
-        max_length=7,
+        max_length=settings.COLOR_MAX_LENGTH,
     )
     slug = models.CharField(
         unique=True,
@@ -28,7 +28,7 @@ class Tag(models.Model):
         ordering = ('name',)
 
     def __str__(self):
-        return self.name[:30]
+        return self.name[:settings.STR_MAX_LENGTH]
 
 
 class Ingredient(models.Model):
@@ -54,7 +54,7 @@ class Ingredient(models.Model):
 
     def __str__(self):
         return (
-            f'{self.name[:30]} ({self.measurement_unit})'
+            f'{self.name[:settings.STR_MAX_LENGTH]} ({self.measurement_unit})'
         )
 
 
@@ -136,7 +136,7 @@ class IngredientRecipe(models.Model):
 
     def __str__(self):
         return (
-            f'{self.ingredient.name[:30]} - {self.amount}'
+            f'{self.ingredient.name[:settings.STR_MAX_LENGTH]} - {self.amount}'
             f'{self.ingredient.measurement_unit}'
         )
 
@@ -159,14 +159,16 @@ class TagRecipe(models.Model):
         ordering = ('recipe',)
 
     def __str__(self):
-        return f'{self.recipe.name[:30]} - {self.tag.name}'
+        return (
+            f'{self.recipe.name[:settings.STR_MAX_LENGTH]}'
+            f' - {self.tag.name}'
+        )
 
 
-class Favorite(models.Model):
+class FavoriteShoppingCartBaseModel(models.Model):
     recipe = models.ForeignKey(
         Recipe,
-        related_name='favorites',
-        verbose_name='Избранный рецепт',
+        verbose_name='Рецепт',
         on_delete=models.CASCADE,
     )
     user = models.ForeignKey(
@@ -176,31 +178,35 @@ class Favorite(models.Model):
     )
 
     class Meta:
+        abstract = True
+        ordering = ('recipe',)
+
+    def __str__(self):
+        return self.recipe.name[:settings.STR_MAX_LENGTH]
+
+
+class Favorite(FavoriteShoppingCartBaseModel):
+    class Meta(FavoriteShoppingCartBaseModel.Meta):
+        default_related_name = 'favorites'
         verbose_name = 'Избранный рецепт'
         verbose_name_plural = 'Избранные рецепты'
-        ordering = ('recipe',)
+        constraints = [
+            models.UniqueConstraint(
+                fields=['recipe', 'user'],
+                name='unique_favorite_recipe',
+            ),
+        ]
 
-    def __str__(self):
-        return f'({self.recipe.name[:30]}, {self.user.username}'
 
+class ShoppingCart(FavoriteShoppingCartBaseModel):
 
-class ShoppingCart(models.Model):
-    recipe = models.ForeignKey(
-        Recipe,
-        verbose_name='Рецепт из списка покупок',
-        related_name='shopping_cart',
-        on_delete=models.CASCADE,
-    )
-    user = models.ForeignKey(
-        User,
-        verbose_name='Пользователь',
-        on_delete=models.CASCADE,
-    )
-
-    class Meta:
+    class Meta(FavoriteShoppingCartBaseModel.Meta):
+        default_related_name = 'shopping_cart'
         verbose_name = 'Список покупок'
         verbose_name_plural = 'Списки покупок'
-        ordering = ('recipe',)
-
-    def __str__(self):
-        return self.recipe.name[:30]
+        constraints = [
+            models.UniqueConstraint(
+                fields=['recipe', 'user'],
+                name='unique_shopping_cart_recipe',
+            ),
+        ]
