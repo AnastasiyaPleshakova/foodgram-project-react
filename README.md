@@ -2,7 +2,7 @@
 
 https://pleshakova.hopto.org/admin/
 
-![workflow status badge](https://github.com/AnastasiyaPleshakova/foodgram-project-react/actions/workflows/foodgram-project-react_workflow.yml/badge.svg)
+![workflow status badge](https://github.com/AnastasiyaPleshakova/foodgram-project-react/actions/workflows/foodgram_workflow.yml/badge.svg)
 
 ### **Описание:**
 Реализован программный интерфейс API для сервиса "Продуктовый помощник". 
