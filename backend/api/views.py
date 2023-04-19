@@ -20,7 +20,7 @@ from api.filters import IngredientSearchFilter, RecipeFilter
 from api.paginations import LimitCustomPagination
 from api.permissons import IsAuthorOrAdminOrReadOnly
 from api.serializers import (
-    IngredientSerializer,  FavoriteSerializer,
+    IngredientSerializer, FavoriteSerializer,
     RecipeListSerializer, RecipeSerializer,
     ShoppingCartSerializer, SubscriptionListSerializer,
     SubscriptionSerializer, TagSerializer,

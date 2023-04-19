@@ -7,7 +7,7 @@ from recipes.models import Ingredient, Tag
 TAGS = (
     ('Завтрак', '#9ACD32', 'breakfast',), ('Обед', '#FFA500', 'lunch',),
     ('Ужин', '#FA8072', 'dinner',), ('Десерт', '#4A8EF6', 'dessert',),
-    )
+)
 
 
 class Command(BaseCommand):
