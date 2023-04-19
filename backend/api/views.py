@@ -118,7 +118,8 @@ class RecipeViewSet(ModelViewSet):
                 f'{number}. '
                 f'{ingredient["ingredient__name"]}'
                 f' - {ingredient["amount__sum"]}'
-                f'{ingredient["ingredient__measurement_unit"]}')
+                f'{ingredient["ingredient__measurement_unit"]}'
+            )
             height_text -= 20
             number += 1
         p.showPage()
@@ -154,16 +155,16 @@ class APISubscription(APIView):
         author = get_object_or_404(User, id=self.kwargs.get('author_id'))
         serializer = SubscriptionSerializer(
             data={'author': author.pk, 'user': request.user.pk},
-            context={'request': request},)
+            context={'request': request},
+        )
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def delete(self, request, **kwargs):
-        subscription = get_object_or_404(
+        get_object_or_404(
             Subscription,
             author=get_object_or_404(User, id=self.kwargs.get('author_id')).pk,
             user=request.user.pk,
-        )
-        subscription.delete()
+        ).delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

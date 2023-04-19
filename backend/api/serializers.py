@@ -29,7 +29,8 @@ class CustomUserSerializer(UserSerializer):
 
     def get_is_subscribed(self, obj):
         request = self.context.get('request')
-        return (request
+        return (
+                request
                 and request.user.is_authenticated
                 and obj.subscription.filter(user=request.user).exists()
                 )
@@ -104,7 +105,8 @@ class RecipeListSerializer(ModelSerializer):
 
     def get_ingredients(self, obj):
         return IngredientRecipeListSerializer(
-            IngredientRecipe.objects.filter(recipe=obj), many=True).data
+            IngredientRecipe.objects.filter(recipe=obj), many=True
+        ).data
 
 
 class IngredientRecipeSerializer(ModelSerializer):
@@ -198,8 +200,7 @@ class RecipeSerializer(ModelSerializer):
                 recipe=recipe,
                 ingredient_id=ingredient.get('id'),
                 amount=ingredient.get('amount'),
-            )
-            for ingredient in ingredients
+            )for ingredient in ingredients
         ]
         ingredient_list.sort(
             key=lambda element: element.ingredient.name,
@@ -228,7 +229,6 @@ class RecipeSerializer(ModelSerializer):
         instance.tags.clear()
         instance.tags.set(id_tags)
         self.create_link_ingredients(ingredients, instance)
-        instance.save()
         return super().update(instance, validated_data)
 
 

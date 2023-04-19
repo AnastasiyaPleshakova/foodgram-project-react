@@ -8,9 +8,9 @@ load_dotenv()
 
 SECRET_KEY = os.getenv('SECRET_KEY', default='_#jpagtoh5m+duy#hhj8b=l!zu01r9gxdyeai2yv3k-0=1a3$!')
 
-DEBUG = os.getenv('DEBUG_VALUE', default=False)
+DEBUG = os.getenv('DEBUG_VALUE', default=False) == 'True'
 
-ALLOWED_HOSTS = os.getenv('HOST_VALUE', default='*')
+ALLOWED_HOSTS = os.getenv('HOST_VALUE', default='*').split(',')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
@@ -135,6 +135,10 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CORS_URLS_REGEX = r'^/api/.*$'
 
@@ -147,6 +151,3 @@ EMAIL_MAX_LENGTH = 254
 USER_MAX_LENGTH = 150
 COLOR_MAX_LENGTH = 7
 STR_MAX_LENGTH = 30
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

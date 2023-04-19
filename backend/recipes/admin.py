@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.models import Group
+from django.utils.safestring import mark_safe
 
 from recipes.models import (
     Favorite, Ingredient, IngredientRecipe,
@@ -38,7 +39,7 @@ class TagRecipeTabular(admin.TabularInline):
 class RecipeAdmin(admin.ModelAdmin):
     list_display = (
         'pk', 'name',
-        'author', 'image',
+        'author', 'get_image',
         'pub_date', 'get_ingredients',
         'get_tags', 'get_count_favorites',
     )
@@ -47,22 +48,25 @@ class RecipeAdmin(admin.ModelAdmin):
     search_fields = ('name',)
     inlines = [IngredientRecipeTabular, TagRecipeTabular, ]
 
+    @admin.display(description='Ингредиенты')
     def get_ingredients(self, obj):
         return ', '.join([
             ingredient.name for ingredient in obj.ingredients.all()
         ])
 
+    @admin.display(description='Теги')
     def get_tags(self, obj):
         return ', '.join([
             tag.name for tag in obj.tags.all()
         ])
 
+    @admin.display(description='Кол-во в избранном')
     def get_count_favorites(self, obj):
         return obj.favorites.count()
 
-    get_ingredients.short_description = 'Ингредиенты'
-    get_tags.short_description = 'Теги'
-    get_count_favorites.short_description = 'Кол-во добавлений в избранное'
+    @admin.display(description='Изображение')
+    def get_image(self, obj):
+        return mark_safe(f'<img src={obj.image.url} width="80" height="60">')
 
 
 @admin.register(IngredientRecipe)
