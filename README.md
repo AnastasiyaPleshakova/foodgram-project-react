@@ -1,6 +1,6 @@
 # **Продуктовый помощник**
 
-https://pleshakova.hopto.org/admin/
+https://pleshakova.hopto.org/
 
 ![workflow status badge](https://github.com/AnastasiyaPleshakova/foodgram-project-react/actions/workflows/foodgram_workflow.yml/badge.svg)
 
