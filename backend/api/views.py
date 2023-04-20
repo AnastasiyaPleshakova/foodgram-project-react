@@ -104,13 +104,12 @@ class RecipeViewSet(ModelViewSet):
         HEADER_HEIGHT = 800
         height_text = 770
         number = 1
-        pdfmetrics.registerFont(TTFont('TNR', 'times.ttf'))
-        pdfmetrics.registerFont(TTFont('TNRB', 'timesbd.ttf'))
+        pdfmetrics.registerFont(TTFont('FreeSans', 'data/FreeSans.ttf'))
         buffer = io.BytesIO()
         p = canvas.Canvas(buffer)
-        p.setFont('TNRB', 20)
+        p.setFont('FreeSans', 23)
         p.drawString(INDENT, HEADER_HEIGHT, 'Список ингредиентов:')
-        p.setFont('TNR', 15)
+        p.setFont('FreeSans', 15)
         for ingredient in ingredients:
             p.drawString(
                 INDENT,
