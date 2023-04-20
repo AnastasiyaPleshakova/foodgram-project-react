@@ -1,6 +1,6 @@
 # **Продуктовый помощник**
 
-https://pleshakova.hopto.org/
+[Ссылка на "Продуктовый помощник"](http://pleshakova.hopto.org/)
 
 ![workflow status badge](https://github.com/AnastasiyaPleshakova/foodgram-project-react/actions/workflows/foodgram_workflow.yml/badge.svg)
 
@@ -73,24 +73,24 @@ docker-compose exec web python manage.py load_data
 ```
 Готово:
 
-http://localhost/admin/
+http://pleshakova.hopto.org/
 
 ---
 ### **Примеры:**
 ```
-GET-запрос к эндпоинту /api/recipes/ - получение списка всех рецептов
+GET-запрос к эндпоинту .../api/recipes/ - получение списка всех рецептов
 ```
 ```
-POST-запрос к эндпоинту /api/recipes/<recipe_id>/favorite - добавление рецепта в избранное
+POST-запрос к эндпоинту .../api/recipes/<recipe_id>/favorite - добавление рецепта в избранное
 ```
 ```
-POST-запрос к эндпоинту /api/recipes/<recipe_id>/shopping_cart/ - добавление рецепта в список покупок
+POST-запрос к эндпоинту .../api/recipes/<recipe_id>/shopping_cart/ - добавление рецепта в список покупок
 ```
 ```
-POST-запрос к эндпоинту /api/recipes/download_shopping_cart/ - скачивание списка покупок
+POST-запрос к эндпоинту .../api/recipes/download_shopping_cart/ - скачивание списка покупок
 ```
 ```
-POST-запрос к эндпоинту /api/users/subscriptions/ - получение списка подписок
+POST-запрос к эндпоинту .../api/users/subscriptions/ - получение списка подписок
 ```
 Внимание! Для доступа к эндпоинтам некоторых типов запросов необходимо зарегистрироваться и получить токен.
 
@@ -110,8 +110,7 @@ DB_HOST=db
 DB_PORT=5432
 ```
 ---
-### **ReDoc:**
-http://127.0.0.1/redoc/
+
 ### **Автор (студент 47 когорты):**
 
 Плешакова Анастасия
