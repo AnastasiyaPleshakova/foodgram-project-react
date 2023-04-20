@@ -15,7 +15,7 @@ class Command(BaseCommand):
 
     def _load_ingredients(self):
         with open(
-                '../data/ingredients.csv',
+                'data/ingredients.csv',
                 encoding='utf-8'
         ) as csvfile:
             reader = csv.reader(csvfile)
